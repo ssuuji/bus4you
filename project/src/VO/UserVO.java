@@ -12,7 +12,6 @@ public class UserVO {
     public UserVO(int id, String userId, String password, String name, String phone, int point, int isManager){
         this.id = id;
         this.userId = userId;
-        this.name = name;
         this.password = password;
         this.name = name;
         this.phone = phone;
@@ -46,6 +45,34 @@ public class UserVO {
 
     public int getIsManager() {
         return isManager;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
+    public void setIsManager(int isManager) {
+        this.isManager = isManager;
     }
 
     @Override

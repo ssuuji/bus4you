@@ -18,8 +18,27 @@ public class OperationVO {
         this.fk_routeId = fk_routeId;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public String getBoardingDate() {
+        return boardingDate;
+    }
 
+    public String getStartTime() {
+        return startTime;
+    }
 
+    public String getArriveTime() {
+        return arriveTime;
+    }
 
+    public int getFk_busId() {
+        return fk_busId;
+    }
+
+    public int getFk_routeId() {
+        return fk_routeId;
+    }
 }
