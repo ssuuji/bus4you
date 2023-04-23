@@ -19,7 +19,7 @@ public class UserDAO {
 	
 	public UserDAO() throws SQLException, ClassNotFoundException {
 		DBConn dbconn = new DBConn();
-		this.conn = DBConn.getCon();
+		this.conn = dbconn.getCon();
 	}
 	
 	/*
@@ -41,7 +41,7 @@ public class UserDAO {
 			
 			while(resultSet.next()) {
 				RouteVO route = new RouteVO(resultSet.getInt("id"),resultSet.getString("BoardingDate").toString(),
-						resultSet.getString("Startlocation"),resultSet.getString("Arrivelocation"), resultSet.getInt("FK_busID"));
+						resultSet.getString("Startlocation"),resultSet.getString("Arrivelocation"),resultSet.getInt("fee"), resultSet.getInt("FK_busID"));
 				
 				routeVOArrayList.add(route);
 			}	

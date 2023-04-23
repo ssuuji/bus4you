@@ -1,4 +1,4 @@
-package GUI.USER;
+package GUI.User;
 
 import VO.RouteVO;
 import VO.UserVO;

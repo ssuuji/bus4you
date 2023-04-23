@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import DAO.LoginDAO;
 import GUI.Manager.AdminMain;
+import GUI.User.UserMain;
 import VO.UserVO;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -110,6 +111,9 @@ public class Login extends JFrame {
                             dispose();
                         }else {
                             // user
+                            UserMain userMain = new UserMain(user);
+                            userMain.setVisible(true);
+                            dispose();
                             System.out.println("손님");
                         }
                         dispose();

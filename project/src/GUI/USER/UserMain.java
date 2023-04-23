@@ -1,4 +1,4 @@
-package GUI.USER;
+package GUI.User;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -11,24 +11,17 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import Conn.DBConn;
 import DAO.UserDAO;
-import VO.RouteVO;
 import VO.UserVO;
 
 import java.awt.event.ActionListener;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.awt.event.ActionEvent;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class User_main extends JFrame {
+public class UserMain extends JFrame {
 
 	UserDAO user = new UserDAO();
 	
@@ -51,28 +44,14 @@ public class User_main extends JFrame {
 	
 	
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					User_main frame = new User_main();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame. 
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 */
-	public User_main() throws ClassNotFoundException, SQLException{
+	public UserMain(UserVO userVO) throws ClassNotFoundException, SQLException{
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -162,10 +141,8 @@ public class User_main extends JFrame {
 		JButton btnMyreservation = new JButton("나의 예매티켓 확인");
 		btnMyreservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				User_myreservation frame = new User_myreservation();//예매한 내역 보여주기
-                frame.setVisible(true);
-  
+
+
 			}
 		});
 		btnMyreservation.setBounds(89, 354, 364, 45);
@@ -189,7 +166,7 @@ public class User_main extends JFrame {
 				
 				//int point = Integer.parseInt(textMyPoint.getText());
 				
-				int point = user.chargePoint(1); //로그인 합치고나서 아이디 ,,내리기
+				int point = user.chargePoint(userVO.getId()); //로그인 합치고나서 아이디 ,,내리기
 
 			
 				textMyPoint.setText(String.valueOf(point));
@@ -200,7 +177,7 @@ public class User_main extends JFrame {
 		contentPane.add(btnCharge);
 		
 		textMyPoint = new JTextField();
-		textMyPoint.setText("10000");// 아이디,,
+		textMyPoint.setText(String.valueOf(userVO.getPoint()));// 아이디,,
 		textMyPoint.setEditable(false); // 수정 못하게
 		textMyPoint.setBounds(226, 437, 193, 25);
 		contentPane.add(textMyPoint);

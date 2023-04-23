@@ -3,6 +3,7 @@ package DAO;
 import Conn.DBConn;
 import VO.BusVO;
 import VO.OperationVO;
+import VO.RouteVO;
 import VO.UserVO;
 
 import java.sql.*;
@@ -25,7 +26,7 @@ public class ManagerDAO {
     // 생성자
     public ManagerDAO() throws SQLException, ClassNotFoundException {
         DBConn dbConn = new DBConn();
-        this.conn = DBConn.getCon();
+        this.conn = dbConn.getCon();
     }
 
     /*
