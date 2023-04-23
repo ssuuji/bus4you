@@ -8,10 +8,10 @@ public class DBConn {
     private static Connection con;
     private String url = "jdbc:oracle:thin:@localhost:1521:xe";
     private String id = "hr";
-    private String pw = "hr";
-
-    public static Connection getCon(){
+    private String pw = "1234";
+    public Connection getCon(){
         return con;
+        
     }
 
     public DBConn() throws ClassNotFoundException, SQLException {

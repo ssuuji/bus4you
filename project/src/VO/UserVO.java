@@ -13,7 +13,6 @@ public class UserVO {
         this.id = id;
         this.userId = userId;
         this.password = password;
-        this.name = name;
         this.phone = phone;
         this.point = point;
         this.isManager = isManager;
