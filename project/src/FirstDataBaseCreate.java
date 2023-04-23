@@ -32,7 +32,7 @@ public class FirstDataBaseCreate {
                 "password VARCHAR2(20)NOT NULL ," +
                 "name varchar2(15)NOT NULL ," +
                 "phone varchar2(20)NOT NULL ," +
-                "point NUMBER(15) NOT NULL," +
+                "point NUMBER(15) DEFAULT 10000 NOT NULL," +
                 "isManager NUMBER(1) DEFAULT 0 NOT NULL" +
                 ")";
 
@@ -56,8 +56,9 @@ public class FirstDataBaseCreate {
                 "boardingDate DATE NOT NULL," +
                 "startLocation VARCHAR2(20) NOT NULL," +
                 "arriveLocation VARCHAR2(20) NOT NULL," +
+                "fee NUMBER(10) NOT NULL," +
                 "fk_busID NUMBER(10) NOT NULL," +
-                "CONSTRAINT bus_routeID foreign key(fk_busID) references bus4you_Bus(id)" +
+                "CONSTRAINT bus_routeID foreign key(fk_busID) references bus4you_Bus(id) ON DELETE CASCADE" +
                 ")";
 
         /*
@@ -68,10 +69,12 @@ public class FirstDataBaseCreate {
         String operationTable = "CREATE TABLE bus4you_Operation(" +
                 "id NUMBER(10) generated always as IDENTITY PRIMARY KEY," +
                 "boardingDate DATE NOT NULL," +
-                "startTime DATE NOT NULL," +
-                "arriveTime DATE NOT NULL," +
+                "startTime VARCHAR2(10) NOT NULL," +
+                "arriveTime VARCHAR2(10) NOT NULL," +
+                "fk_routeID NUMBER(10) NOT NULL," +
                 "fk_busID NUMBER(10) NOT NULL," +
-                "CONSTRAINT bus_operationID foreign key(fk_busID) references bus4you_Bus(id)" +
+                "CONSTRAINT bus_operation_routeID FOREIGN KEY(fk_routeID) REFERENCES bus4you_Route(id) ON DELETE CASCADE, " +
+                "CONSTRAINT bus_operation_busID foreign key(fk_busID) references bus4you_Bus(id) ON DELETE CASCADE" +
                 ")";
 
 
@@ -86,8 +89,8 @@ public class FirstDataBaseCreate {
                 "seatID NUMBER NOT NULL," +
                 "fk_userID NUMBER(10) NOT NULL," +
                 "fk_routeId NUMBER(10) NOT NULL ," +
-                "CONSTRAINT user_reservationID foreign key(fk_userID) references bus4you_User(id)," +
-                "CONSTRAINT route_reservationID foreign key(fk_routeID) references bus4you_Route(id)" +
+                "CONSTRAINT user_reservationID foreign key(fk_userID) references bus4you_User(id) ON DELETE CASCADE," +
+                "CONSTRAINT route_reservationID foreign key(fk_routeID) references bus4you_Route(id) ON DELETE CASCADE" +
                 ")";
 
 
