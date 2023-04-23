@@ -15,5 +15,46 @@ public class RouteVO {
         this.fk_busId = fk_busId;
     }
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getBoardingDate() {
+		return boardingDate;
+	}
+
+	public void setBoardingDate(String boardingDate) {
+		this.boardingDate = boardingDate;
+	}
+
+	public String getStartLocation() {
+		return startLocation;
+	}
+
+	public void setStartLocation(String startLocation) {
+		this.startLocation = startLocation;
+	}
+
+	public String getArriveLocation() {
+		return arriveLocation;
+	}
+
+	public void setArriveLocation(String arriveLocation) {
+		this.arriveLocation = arriveLocation;
+	}
+
+	public int getFk_busId() {
+		return fk_busId;
+	}
+
+	public void setFk_busId(int fk_busId) {
+		this.fk_busId = fk_busId;
+	}
+
+
 
 }

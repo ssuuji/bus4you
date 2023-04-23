@@ -14,7 +14,6 @@ public class UserVO {
         this.userId = userId;
         this.name = name;
         this.password = password;
-        this.name = name;
         this.phone = phone;
         this.point = point;
         this.isManager = isManager;
