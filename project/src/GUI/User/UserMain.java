@@ -7,11 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import DAO.UserDAO;
+import GUI.Login;
 import VO.UserVO;
 
 import java.awt.event.ActionListener;
@@ -42,10 +44,6 @@ public class UserMain extends JFrame {
 	
 	private JPanel contentPane;
 	
-	
-	
-
-
 	/**
 	 * Create the frame. 
 	 * @throws SQLException 
@@ -65,7 +63,7 @@ public class UserMain extends JFrame {
 		JLabel lblRoute = new JLabel("노선조회");
 		lblRoute.setFont(new Font("굴림", Font.PLAIN, 30));
 		lblRoute.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRoute.setBounds(198, 59, 148, 45);
+		lblRoute.setBounds(220, 60, 148, 45);
 		contentPane.add(lblRoute);
 		
 	
@@ -78,7 +76,7 @@ public class UserMain extends JFrame {
 		
 		
 		startCombo = new JComboBox(location);
-		startCombo.setBounds(198, 114, 221, 50);
+		startCombo.setBounds(198, 117, 221, 50);
 		contentPane.add(startCombo);	
 		
 		JLabel lblArrive = new JLabel("목적지");
@@ -87,7 +85,7 @@ public class UserMain extends JFrame {
 		contentPane.add(lblArrive);
 		
 		arriveCombo = new JComboBox(location);
-		arriveCombo.setBounds(198, 173, 221, 50);
+		arriveCombo.setBounds(198, 176, 221, 50);
 		contentPane.add(arriveCombo);
 		
 		
@@ -100,7 +98,7 @@ public class UserMain extends JFrame {
 		contentPane.add(lblDate);
 		
 		textDate = new JTextField();
-		textDate.setBounds(198, 230, 221, 53);
+		textDate.setBounds(198, 235, 221, 51);
 		contentPane.add(textDate);
 		textDate.setColumns(10);
 		
@@ -112,8 +110,6 @@ public class UserMain extends JFrame {
 		btnCheck.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//출발지 != 목적지
-				
 				
 				
 				String startlocation = startCombo.getSelectedItem().toString();
@@ -121,21 +117,30 @@ public class UserMain extends JFrame {
 				String boardingdate = textDate.getText();
 				
 				UserFindRoute find;
-				try {
-					find = new UserFindRoute(startlocation,arrivelocation,boardingdate);
-					find.setVisible(true);	
-				} catch (ClassNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				
+				//출발지 = 목적지
+				if(startlocation.equals(arrivelocation)) {
+					JOptionPane.showMessageDialog(UserMain.this,"출발지와 목적지가 같습니다!","error",JOptionPane.ERROR_MESSAGE);
+					
+				} else { //출발지 != 목적지
+					
+					try {
+						find = new UserFindRoute(startlocation,arrivelocation,boardingdate);
+						find.setVisible(true);	
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 				}
 				
                 
 			}
 		});
-		btnCheck.setBounds(198, 293, 125, 36);
+		btnCheck.setBounds(220, 293, 125, 36);
 		contentPane.add(btnCheck);
 		
 		JButton btnMyreservation = new JButton("나의 예매티켓 확인");
@@ -153,8 +158,8 @@ public class UserMain extends JFrame {
 		 	포인트 충전하기
 		*/
 		JLabel lblPoint = new JLabel("잔여 포인트");
-		lblPoint.setFont(new Font("굴림", Font.PLAIN, 20));
-		lblPoint.setBounds(89, 437, 125, 24);
+		lblPoint.setFont(new Font("굴림", Font.PLAIN, 17));
+		lblPoint.setBounds(101, 438, 85, 24);
 		contentPane.add(lblPoint);
 		
 		
@@ -166,22 +171,39 @@ public class UserMain extends JFrame {
 				
 				//int point = Integer.parseInt(textMyPoint.getText());
 				
-				int point = user.chargePoint(userVO.getId()); //로그인 합치고나서 아이디 ,,내리기
+				int point = user.chargePoint(userVO.getId());
 
 			
 				textMyPoint.setText(String.valueOf(point));
 				
 			}
 		});
-		btnCharge.setBounds(198, 479, 125, 36);
+		btnCharge.setBounds(220, 479, 125, 36);
 		contentPane.add(btnCharge);
 		
 		textMyPoint = new JTextField();
-		textMyPoint.setText(String.valueOf(userVO.getPoint()));// 아이디,,
+		textMyPoint.setText(String.valueOf(userVO.getPoint()));
 		textMyPoint.setEditable(false); // 수정 못하게
-		textMyPoint.setBounds(226, 437, 193, 25);
+		textMyPoint.setBounds(198, 439, 221, 25);
 		contentPane.add(textMyPoint);
 		textMyPoint.setColumns(10);
+		/*
+		     로그아웃
+		*/
+		JButton btblogout = new JButton("로그아웃");
+		btblogout.setFont(new Font("굴림", Font.PLAIN, 15));
+		btblogout.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				dispose(); //UserMain 닫고
+				
+				Login login =new Login();
+				login.setVisible(true); //Login 화면이동
+			}
+		});
+		btblogout.setBounds(469, 519, 107, 36);
+		contentPane.add(btblogout);
 		
 	}
 }
