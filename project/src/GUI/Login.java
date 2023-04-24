@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
@@ -83,9 +85,12 @@ public class Login extends JFrame {
         JButton btnNewButton_join = new JButton("회원가입");                   //회원가입 누르면 join창 호출
         btnNewButton_join.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	
                 Join join_1 = new Join();           //
+                
                 join_1.setVisible(true);
                 join_1.setLocationRelativeTo(null);
+                
             }
         });
         btnNewButton_join.setFont(new Font("굴림", Font.PLAIN, 18));
@@ -131,6 +136,8 @@ public class Login extends JFrame {
 
             }
         });
+        
+      
 
 
         btnNewButton_login.setFont(new Font("굴림", Font.PLAIN, 18));
