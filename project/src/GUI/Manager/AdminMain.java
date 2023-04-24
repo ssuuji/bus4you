@@ -50,11 +50,12 @@ public class AdminMain extends JFrame {
         contentPane.setLayout(null);
 
         JLabel lblNewLabel = new JLabel("관리자 페이지");
+        lblNewLabel.setBounds(136, 10, 197, 53);
         lblNewLabel.setFont(new Font("굴림", Font.BOLD, 30));
-        lblNewLabel.setBounds(138, 10, 197, 53);
         contentPane.add(lblNewLabel);
 
         JButton btnNewButton = new JButton("회사 버스 조회");
+        btnNewButton.setBounds(163, 73, 151, 44);
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -68,11 +69,11 @@ public class AdminMain extends JFrame {
                 }
             }
         });
-        btnNewButton.setBounds(163, 20, 151, 44);
         contentPane.add(btnNewButton);
 
 
         JButton btnNewButton_1 = new JButton("회원 목록 조회");
+        btnNewButton_1.setBounds(163, 127, 151, 44);
         btnNewButton_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -86,10 +87,10 @@ public class AdminMain extends JFrame {
                 }
             }
         });
-        btnNewButton_1.setBounds(163, 90, 151, 44);
         contentPane.add(btnNewButton_1);
 
         JButton btnNewButton_2 = new JButton("노선 조회");
+        btnNewButton_2.setBounds(163, 184, 151, 44);
         btnNewButton_2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -103,10 +104,10 @@ public class AdminMain extends JFrame {
                 }
             }
         });
-        btnNewButton_2.setBounds(163, 163, 151, 44);
         contentPane.add(btnNewButton_2);
 
         JButton btnNewButton_3 = new JButton("로그아웃");
+        btnNewButton_3.setBounds(163, 239, 151, 44);
         btnNewButton_3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Login login = new Login();
@@ -114,7 +115,6 @@ public class AdminMain extends JFrame {
                 dispose();
             }
         });
-        btnNewButton_3.setBounds(163, 234, 151, 44);
         contentPane.add(btnNewButton_3);
     }
 

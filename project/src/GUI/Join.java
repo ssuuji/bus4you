@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,26 +30,36 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
-public class Join extends JFrame {
+public class Join extends JDialog {
 
     private JPanel contentPane;
     private JTextField textField_id;
     private JTextField textField_pw;
     private JTextField textField_name;
     private JTextField textField_phone;
-
-
+    boolean overlap=false;
+    Login login = new Login();
+    
     /**
      * Create the frame.
      */
     public Join() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setModal(true); // 모달 대화상자로 설정
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 592, 433);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         setContentPane(contentPane);
-        contentPane.setLayout(null);
+        contentPane.setLayout(null);	
+    	
+//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        setBounds(100, 100, 592, 433);
+//        contentPane = new JPanel();
+//        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+//
+//        setContentPane(contentPane);
+//        contentPane.setLayout(null);
 
         JLabel lblNewLabel = new JLabel("회원가입");
         lblNewLabel.setFont(new Font("굴림", Font.BOLD, 30));
@@ -107,6 +119,7 @@ public class Join extends JFrame {
                     JoinDAO joinDAO = new JoinDAO();
                     boolean checkResult = joinDAO.Check(userid);
                     JOptionPane.showMessageDialog(null, (checkResult) ? "사용 중인 아이디 입니다." : "사용 가능한 아이디 입니다.");
+                    overlap = (checkResult) ? false:true;
                 }catch (ClassNotFoundException | SQLException e1) {
                     // TODO Auto-generated catch block
                     e1.printStackTrace();
@@ -142,7 +155,8 @@ public class Join extends JFrame {
                     JOptionPane.showMessageDialog(null, "핸드폰 번호를 입력해주세요.");
                     return;
                 }
-
+                
+                if(overlap) {
                 try {
                     JoinDAO joinDAO = new JoinDAO();
                     boolean b1 = joinDAO.Join_insert(userid, pw, name, phone); // 데이터 삽입 시도
@@ -162,6 +176,11 @@ public class Join extends JFrame {
                 //    Logger.getLogger(Join_1.class.getName()).log(Level.SEVERE, null, ex);
 
                 dispose();
+                }
+                else {
+                	JOptionPane.showMessageDialog(null, "중복 확인을 눌르세요");
+                }
+                
             }
         });
         btnNewButton_go.setBounds(157, 321, 102, 42);
@@ -170,7 +189,8 @@ public class Join extends JFrame {
         JButton btnNewButton_cancel = new JButton("취소");                  //취소버튼 누를시 창 닫기
         btnNewButton_cancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                dispose();
+            	
+            	dispose();
             }
         });
         btnNewButton_cancel.setBounds(326, 321, 102, 42);
