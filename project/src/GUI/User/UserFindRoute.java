@@ -64,6 +64,7 @@ public class UserFindRoute extends JFrame {
         table = new JTable(model);
         scrolledTable = new JScrollPane(table);
         contentPane.add(scrolledTable, BorderLayout.CENTER);
+        
 
         
         

@@ -37,12 +37,20 @@ public class UserDAO {
 			preparedStatement.setDate(3, Date.valueOf(boardingdate));
 
 			ResultSet resultSet = preparedStatement.executeQuery();
+<<<<<<< HEAD
 
 			while (resultSet.next()) {
 				RouteVO route = new RouteVO(resultSet.getInt("id"), resultSet.getString("BoardingDate").toString(),
 						resultSet.getString("Startlocation"), resultSet.getString("Arrivelocation"),
 						resultSet.getInt("fee"), resultSet.getInt("FK_busID"));
 
+=======
+			
+			while(resultSet.next()) {
+				RouteVO route = new RouteVO(resultSet.getInt("id"),resultSet.getDate("BoardingDate").toString(),
+						resultSet.getString("Startlocation"),resultSet.getString("Arrivelocation"),resultSet.getInt("fee"), resultSet.getInt("FK_busID"));
+				
+>>>>>>> f0cd87873bab56446960759b12b82890b00b7f5f
 				routeVOArrayList.add(route);
 			}
 		} catch (SQLException exception) {

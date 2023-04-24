@@ -111,6 +111,33 @@ public class CheckOperation{
         btnRegister.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	
+            	///check
+            	///////////////////
+            	for (OperationVO operationVO : findAllOperations) {
+            	    String startTimeStr = operationVO.getStartTime();
+            	    String arriveTimeStr = operationVO.getArriveTime();
+            	    String depTimeStr = textFieldDepartureTime.getText();
+            	    String arrTimeStr = textFieldArrivalTime.getText();
+            	    
+            	    int startTime = Integer.parseInt(startTimeStr.replace(":", ""));
+            	    int arriveTime = Integer.parseInt(arriveTimeStr.replace(":", ""));
+            	    int depTime = Integer.parseInt(depTimeStr.replace(":", ""));
+            	    int arrTime = Integer.parseInt(arrTimeStr.replace(":", ""));   
+            	 // 기존출발시간이 새출발시간보다 늦고,새도착시간보다 빠를 때, 기존도착시간이 새출발보다 늦고 새도착보다 빠를 때,  기존출발시간이 새출발시간보다 빠르고, 기존도착시간이 새도착시간보다 늦을 때  
+            	    if ((depTime <= startTime && startTime <= arrTime) || (depTime <= arriveTime && arriveTime <= arrTime) 
+            	            || (startTime <= depTime && arrTime <= arriveTime)) {
+            	            JOptionPane.showMessageDialog(null, "이미 사용중인 노선입니다");
+            	            return;
+           	    }
+            	 
+            	  
+            	}
+            	
+            		
+            	
+            	/////////////////////
+            	
                 try {
                     ManagerDAO managerDAO = new ManagerDAO();
                     int routeId = managerDAO.createRoute(date, startFiled.getText(), endFiled.getText(), busId, Integer.parseInt(textFieldFee.getText()));
@@ -132,7 +159,7 @@ public class CheckOperation{
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                dispose();
+                dialog.dispose();
             }
         });
         contentPane.add(panelTop, BorderLayout.NORTH);
