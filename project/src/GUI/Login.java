@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
@@ -19,6 +20,8 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class Login extends JFrame {
 
@@ -48,41 +51,46 @@ public class Login extends JFrame {
      */
     public Login() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 500, 340);
+        setBounds(100, 100, 604, 606);
         contentPane = new JPanel();
+        contentPane.setBackground(Color.WHITE);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
         JLabel lblNewLabel = new JLabel("Bus4You");                 //이름
-        lblNewLabel.setFont(new Font("굴림", Font.BOLD, 30));
-        lblNewLabel.setBounds(185, 10, 204, 42);
+        lblNewLabel.setFont(new Font("휴먼편지체", Font.BOLD, 70));
+        lblNewLabel.setBounds(205, 43, 272, 82);
         contentPane.add(lblNewLabel);
 
         JLabel lblNewLabel_id = new JLabel("ID");                   //ID 라벨
         lblNewLabel_id.setFont(new Font("굴림", Font.BOLD, 20));
-        lblNewLabel_id.setBounds(59, 80, 33, 42);
+        lblNewLabel_id.setBounds(69, 179, 33, 42);
         contentPane.add(lblNewLabel_id);
 
         JLabel lblNewLabel_pw = new JLabel("PW");                  //PW 라벨
         lblNewLabel_pw.setFont(new Font("굴림", Font.BOLD, 20));
-        lblNewLabel_pw.setBounds(59, 156, 33, 42);
+        lblNewLabel_pw.setBounds(69, 277, 33, 42);
         contentPane.add(lblNewLabel_pw);
 
         textField_id = new JTextField();                           //ID 입력 받는 곳
         textField_id.setFont(new Font("굴림", Font.PLAIN, 20));
-        textField_id.setBounds(104, 81, 313, 45);
+        textField_id.setBounds(150, 178, 313, 45);
+        textField_id.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
         contentPane.add(textField_id);
         textField_id.setColumns(10);
 
         passwordField = new JPasswordField();                      //비밀번호 입력 받는 곳
-        passwordField.setBounds(104, 159, 313, 42);
+        passwordField.setBounds(150, 280, 313, 42);
+        passwordField.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
         contentPane.add(passwordField);
 
 
 
         JButton btnNewButton_join = new JButton("회원가입");                   //회원가입 누르면 join창 호출
+        btnNewButton_join.setForeground(new Color(255, 255, 255));
+        btnNewButton_join.setBackground(new Color(30, 144, 255));
         btnNewButton_join.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	
@@ -93,12 +101,14 @@ public class Login extends JFrame {
                 
             }
         });
-        btnNewButton_join.setFont(new Font("굴림", Font.PLAIN, 18));
-        btnNewButton_join.setBounds(104, 235, 117, 57);
+        btnNewButton_join.setFont(new Font("굴림", Font.BOLD, 18));
+        btnNewButton_join.setBounds(150, 388, 117, 57);
         contentPane.add(btnNewButton_join);
 
 
         JButton btnNewButton_login = new JButton("로그인");
+        btnNewButton_login.setForeground(new Color(255, 255, 255));
+        btnNewButton_login.setBackground(new Color(30, 144, 255));
         btnNewButton_login.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String userid = textField_id.getText();
@@ -140,9 +150,14 @@ public class Login extends JFrame {
       
 
 
-        btnNewButton_login.setFont(new Font("굴림", Font.PLAIN, 18));
-        btnNewButton_login.setBounds(287, 235, 117, 57);
+        btnNewButton_login.setFont(new Font("굴림", Font.BOLD, 18));
+        btnNewButton_login.setBounds(348, 388, 117, 57);
         contentPane.add(btnNewButton_login);
+        
+        JLabel lblNewLabel_1 = new JLabel("New label");
+        lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\osj\\Desktop\\dddd\\asd.png"));
+        lblNewLabel_1.setBounds(69, 32, 130, 109);
+        contentPane.add(lblNewLabel_1);
 
     }
 }

@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class AdminFindRoutes extends JFrame {
 
@@ -33,8 +34,9 @@ public class AdminFindRoutes extends JFrame {
      */
     public AdminFindRoutes() throws SQLException, ClassNotFoundException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 554, 554);
+        setBounds(100, 100, 605, 605);
         contentPane = new JPanel();
+        contentPane.setBackground(new Color(255, 255, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         setContentPane(contentPane);
@@ -51,8 +53,12 @@ public class AdminFindRoutes extends JFrame {
         }
 
         table = new JTable(model);
+        table.setBackground(Color.WHITE);
         scrolledTable = new JScrollPane(table);
+        scrolledTable.getViewport().setBackground(Color.WHITE);
         contentPane.add(scrolledTable, BorderLayout.CENTER);
+        JTableHeader hd = table.getTableHeader();
+        hd.setBackground(new Color(30, 144, 255));
 
         /*
             하위 버튼 구조
@@ -60,6 +66,9 @@ public class AdminFindRoutes extends JFrame {
         buttonPanel = new JPanel(new BorderLayout());
         twoButtonPanel = new JPanel(new GridLayout(1, 2));
         btnBuy = new JButton("노선 등록");
+        btnBuy.setForeground(new Color(255, 255, 255));
+        btnBuy.setFont(new Font("굴림", Font.BOLD, 15));
+        btnBuy.setBackground(new Color(30, 144, 255));
         btnBuy.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -76,11 +85,22 @@ public class AdminFindRoutes extends JFrame {
         twoButtonPanel.add(btnBuy);
 
         btnSell = new JButton("노선 삭제");
+        btnSell.setForeground(new Color(255, 255, 255));
+        btnSell.setFont(new Font("굴림", Font.BOLD, 15));
+        btnSell.setBackground(new Color(30, 144, 255));
         btnSell.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // 노선 삭제가 들어갈 구간
                 AdminDeleteRoute adminDeleteRoute = new AdminDeleteRoute();
-
+                try {
+					updateTable();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             }
         });
         twoButtonPanel.add(btnSell);
@@ -89,6 +109,9 @@ public class AdminFindRoutes extends JFrame {
 
 
         JButton btnNewButton = new JButton("메인으로");
+        btnNewButton.setForeground(new Color(255, 255, 255));
+        btnNewButton.setFont(new Font("굴림", Font.BOLD, 15));
+        btnNewButton.setBackground(new Color(30, 144, 255));
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 AdminMain adminMain = new AdminMain();

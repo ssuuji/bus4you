@@ -33,6 +33,7 @@ public class AdminAddRoute extends JFrame implements ActionListener {
         dialog.getContentPane().setLayout(null);
 
         JPanel topPanel = new JPanel(new FlowLayout());
+        topPanel.setBackground(new Color(255, 255, 255));
         topPanel.setBounds(0, 0, 488, 31);
         JLabel dateLabel = new JLabel("날짜:");
         dateField = new JTextField(10);
@@ -44,9 +45,15 @@ public class AdminAddRoute extends JFrame implements ActionListener {
         busTableModel = new DefaultTableModel(header, 0);
         busTable = new JTable(busTableModel);
         busTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        busTable.setBackground(Color.WHITE);
+       
         JScrollPane scrollPane = new JScrollPane(busTable);
+        scrollPane.getViewport().setBackground(Color.WHITE);
         scrollPane.setBounds(0, 31, 488, 211);
         dialog.getContentPane().add(scrollPane);
+        
+        JTableHeader hd = busTable.getTableHeader();
+        hd.setBackground(new Color(30, 144, 255));
 
         ArrayList<BusVO> findAllBuses = new ManagerDAO().findAllBuses();
         for(BusVO busVO : findAllBuses){
@@ -56,11 +63,17 @@ public class AdminAddRoute extends JFrame implements ActionListener {
 
         // 등록 버튼
         registerButton = new JButton("등록");
+        registerButton.setForeground(new Color(255, 255, 255));
+        registerButton.setFont(new Font("굴림", Font.BOLD, 15));
+        registerButton.setBackground(new Color(30, 144, 255));
         registerButton.setBounds(1, 243, 243, 23);
         registerButton.addActionListener(this);
         dialog.getContentPane().add(registerButton);
         
         registerButton_1 = new JButton("취소");
+        registerButton_1.setForeground(new Color(255, 255, 255));
+        registerButton_1.setFont(new Font("굴림", Font.BOLD, 15));
+        registerButton_1.setBackground(new Color(30, 144, 255));
         registerButton_1.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		dialog.dispose();

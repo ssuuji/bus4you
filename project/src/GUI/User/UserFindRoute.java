@@ -13,6 +13,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 
 public class UserFindRoute extends JFrame {
@@ -31,13 +32,15 @@ public class UserFindRoute extends JFrame {
      */
     public UserFindRoute(String startlocation, String arrivelocation, String boardingdate) throws SQLException, ClassNotFoundException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 554, 554);
+        setBounds(100, 100, 604, 605);
         contentPane = new JPanel();
+        contentPane.setBackground(new Color(255, 255, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout());
         JLabel lblNewLabel = new JLabel("노선 조회");
+        lblNewLabel.setBackground(new Color(0, 255, 255));
         lblNewLabel.setFont(new Font("굴림", Font.BOLD, 30));
         contentPane.add(lblNewLabel, BorderLayout.NORTH);
 
@@ -62,12 +65,18 @@ public class UserFindRoute extends JFrame {
         }
 
         table = new JTable(model);
+        table.setBackground(Color.WHITE);
         scrolledTable = new JScrollPane(table);
+        scrolledTable.getViewport().setBackground(Color.WHITE);
         contentPane.add(scrolledTable, BorderLayout.CENTER);
 
-        
+        JTableHeader hd = table.getTableHeader();
+        hd.setBackground(new Color(30, 144, 255));
         
         JButton btnNewButton = new JButton("메인으로");
+        btnNewButton.setForeground(new Color(255, 255, 255));
+        btnNewButton.setFont(new Font("굴림", Font.BOLD, 15));
+        btnNewButton.setBackground(new Color(30, 144, 255));
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 

@@ -19,6 +19,7 @@ public class AdminSellBus {
 
     public AdminSellBus(){
         dialog = new JDialog();
+        dialog.setBackground(new Color(255, 255, 255));
         dialog.setModal(true);
         dialog.setTitle("버스 판매");
         dialog.setSize(200, 100);
@@ -26,15 +27,19 @@ public class AdminSellBus {
 
         // 패널을 만들고 라벨과 텍스트 필드를 추가합니다.
         contentPane = new JPanel(new GridLayout(1, 1));
+        contentPane.setBackground(Color.WHITE);
         busIdLabel = new JLabel("    busId:");
         busIdValue = new JTextField();
 
         contentPane.add(busIdLabel);
         contentPane.add(busIdValue);
-        dialog.add(contentPane, BorderLayout.CENTER);
+        dialog.getContentPane().add(contentPane, BorderLayout.CENTER);
 
         // 확인 버튼을 추가합니다.
         btnOK = new JButton("확인");
+        btnOK.setForeground(new Color(255, 255, 255));
+        btnOK.setFont(new Font("굴림", Font.BOLD, 15));
+        btnOK.setBackground(new Color(30, 144, 255));
         btnOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // 사용자가 입력한 값을 가져옵니다.
@@ -52,7 +57,7 @@ public class AdminSellBus {
                 dialog.dispose();
             }
         });
-        dialog.add(btnOK, BorderLayout.SOUTH);
+        dialog.getContentPane().add(btnOK, BorderLayout.SOUTH);
 
         // 모달 창을 보여줍니다.
         dialog.setVisible(true);

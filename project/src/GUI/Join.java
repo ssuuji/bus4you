@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
@@ -29,6 +30,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class Join extends JDialog {
 
@@ -46,8 +48,9 @@ public class Join extends JDialog {
     public Join() {
         setModal(true); // 모달 대화상자로 설정
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 592, 433);
+        setBounds(100, 100, 605, 605);
         contentPane = new JPanel();
+        contentPane.setBackground(Color.WHITE);
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         setContentPane(contentPane);
@@ -62,51 +65,58 @@ public class Join extends JDialog {
 //        contentPane.setLayout(null);
 
         JLabel lblNewLabel = new JLabel("회원가입");
-        lblNewLabel.setFont(new Font("굴림", Font.BOLD, 30));
-        lblNewLabel.setBounds(198, 10, 134, 51);
+        lblNewLabel.setFont(new Font("굴림", Font.BOLD, 60));
+        lblNewLabel.setBounds(186, 10, 271, 86);
         contentPane.add(lblNewLabel);
 
         JLabel lblNewLabel_id = new JLabel("ID");
         lblNewLabel_id.setFont(new Font("굴림", Font.BOLD, 20));
-        lblNewLabel_id.setBounds(62, 78, 38, 51);
+        lblNewLabel_id.setBounds(69, 131, 38, 51);
         contentPane.add(lblNewLabel_id);
 
         JLabel lblNewLabel_pw = new JLabel("PW");
         lblNewLabel_pw.setFont(new Font("굴림", Font.BOLD, 20));
-        lblNewLabel_pw.setBounds(62, 135, 38, 51);
+        lblNewLabel_pw.setBounds(62, 214, 38, 51);
         contentPane.add(lblNewLabel_pw);
 
         JLabel lblNewLabel_name = new JLabel("이름");
         lblNewLabel_name.setFont(new Font("굴림", Font.BOLD, 20));
-        lblNewLabel_name.setBounds(62, 192, 55, 51);
+        lblNewLabel_name.setBounds(60, 296, 55, 51);
         contentPane.add(lblNewLabel_name);
 
         JLabel lblNewLabel_phone = new JLabel("핸드폰 번호");
         lblNewLabel_phone.setFont(new Font("굴림", Font.BOLD, 20));
-        lblNewLabel_phone.setBounds(33, 251, 123, 51);
+        lblNewLabel_phone.setBounds(36, 368, 123, 51);
         contentPane.add(lblNewLabel_phone);
 
         textField_id = new JTextField();
-        textField_id.setBounds(157, 85, 271, 42);
+        textField_id.setBounds(169, 138, 271, 42);
+        textField_id.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
         contentPane.add(textField_id);
         textField_id.setColumns(10);
 
         textField_pw = new JTextField();
         textField_pw.setColumns(10);
-        textField_pw.setBounds(157, 142, 271, 42);
+        textField_pw.setBounds(169, 221, 271, 42);
+        textField_pw.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
         contentPane.add(textField_pw);
 
         textField_name = new JTextField();
         textField_name.setColumns(10);
-        textField_name.setBounds(157, 199, 271, 42);
+        textField_name.setBounds(169, 297, 271, 42);
+        textField_name.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
         contentPane.add(textField_name);
 
         textField_phone = new JTextField();
         textField_phone.setColumns(10);
-        textField_phone.setBounds(157, 258, 271, 42);
+        textField_phone.setBounds(169, 375, 271, 42);
+        textField_phone.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
         contentPane.add(textField_phone);
 
         JButton btnNewButton = new JButton("중복확인");                                //ID를 입력받으면 DB에 ID가 중복되는게 있나 확인 후 가능 불가능 출력
+        btnNewButton.setForeground(new Color(255, 255, 255));
+        btnNewButton.setFont(new Font("굴림", Font.BOLD, 18));
+        btnNewButton.setBackground(new Color(30, 144, 255));
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String userid = textField_id.getText();
@@ -127,10 +137,13 @@ public class Join extends JDialog {
 
             }
         });
-        btnNewButton.setBounds(450, 84, 102, 42);
+        btnNewButton.setBounds(450, 138, 123, 42);
         contentPane.add(btnNewButton);
 
         JButton btnNewButton_go = new JButton("등록");                        //등록버튼 누르면 화면에 입력된 id pw 이름 핸드폰번호 그리고 point 10000원이 DB에 등록됨
+        btnNewButton_go.setFont(new Font("굴림", Font.BOLD, 18));
+        btnNewButton_go.setForeground(new Color(255, 255, 255));
+        btnNewButton_go.setBackground(new Color(30, 144, 255));
         btnNewButton_go.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -183,17 +196,20 @@ public class Join extends JDialog {
                 
             }
         });
-        btnNewButton_go.setBounds(157, 321, 102, 42);
+        btnNewButton_go.setBounds(169, 453, 102, 42);
         contentPane.add(btnNewButton_go);
 
         JButton btnNewButton_cancel = new JButton("취소");                  //취소버튼 누를시 창 닫기
+        btnNewButton_cancel.setFont(new Font("굴림", Font.BOLD, 18));
+        btnNewButton_cancel.setForeground(new Color(255, 255, 255));
+        btnNewButton_cancel.setBackground(new Color(30, 144, 255));
         btnNewButton_cancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	
             	dispose();
             }
         });
-        btnNewButton_cancel.setBounds(326, 321, 102, 42);
+        btnNewButton_cancel.setBounds(340, 453, 102, 42);
         contentPane.add(btnNewButton_cancel);
     }
 
