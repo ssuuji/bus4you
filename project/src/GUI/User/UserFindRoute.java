@@ -67,6 +67,7 @@ public class UserFindRoute extends JFrame {
 
         table = new JTable(model);
         scrolledTable = new JScrollPane(table);
+        table.setEnabled(false); // 테이블 셀값을 사용자가 수정못하게
         contentPane.add(scrolledTable, BorderLayout.CENTER);
         
         

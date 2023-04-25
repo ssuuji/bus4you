@@ -121,9 +121,10 @@ public class UserMain extends JFrame {
 				//출발지 = 목적지
 				if(startlocation.equals(arrivelocation)) {
 					JOptionPane.showMessageDialog(UserMain.this,"출발지와 목적지가 같습니다!","error",JOptionPane.ERROR_MESSAGE);
-					
-				} else { //출발지 != 목적지
-					
+				} else {
+					if(boardingdate.equals("")) {//날짜 입력 안했을때 경고창
+						JOptionPane.showMessageDialog(UserMain.this, "날짜를 입력해주세요.","error",JOptionPane.ERROR_MESSAGE);
+					}
 					try {
 						find = new UserFindRoute(startlocation,arrivelocation,boardingdate, userVO, textMyPoint);
 						find.setVisible(true);	
@@ -135,11 +136,8 @@ public class UserMain extends JFrame {
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
-					}
-					
-				}
-				
-                
+					}	
+				}				
 			}
 		});
 		btnCheck.setBounds(220, 293, 125, 36);
