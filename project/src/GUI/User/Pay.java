@@ -1,7 +1,6 @@
 package GUI.User;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,15 +9,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 
 import DAO.UserDAO;
 import VO.RouteVO;
 import VO.UserVO;
 
-import javax.accessibility.AccessibleContext;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -28,52 +24,53 @@ import java.sql.SQLException;
 public class Pay extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
-	private int index;
-	private SeatSelect ss;
-	
+	private JLabel jLabelInfo;
+	private JLabel jLabelStart;
+	private JLabel jLabelArrive;
+	private JLabel jLabelTime;
+	private JLabel jLabelFee;
+	private JButton btnPay;
+	private JButton btnCancel;
 	public Pay(UserVO uv, RouteVO rv, int index, SeatSelect ss, JTextField textMyPoint) throws SQLException {
-		
-		this.index = index; // 인덱스 값을 저장
-		this.ss = ss; // SeatSelect 클래스의 인스턴스를 저장
-		
-		System.out.println(rv.getBoardingDate());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 467, 405);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		jLabelInfo = new JLabel("결제정보");
+		jLabelInfo.setBounds(109, 10, 203, 53);
+		jLabelInfo.setFont(new Font("굴림", Font.BOLD, 18));
+		jLabelInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		contentPane.add(jLabelInfo);
 		
-		JLabel lblNewLabel = new JLabel("결제정보");
-		lblNewLabel.setBounds(109, 10, 203, 53);
-		lblNewLabel.setFont(new Font("굴림", Font.BOLD, 18));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		contentPane.add(lblNewLabel);
+		jLabelStart = new JLabel("출발지 : " + rv.getStartLocation());
+		jLabelStart.setBounds(148, 61, 182, 34);
+		jLabelStart.setHorizontalAlignment(SwingConstants.LEFT);
+		contentPane.add(jLabelStart);
 		
-		JLabel lblNewLabel_2 = new JLabel("출발지 : " + rv.getStartLocation());
-		lblNewLabel_2.setBounds(148, 61, 182, 34);
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.LEFT);
-		contentPane.add(lblNewLabel_2);
+		jLabelArrive = new JLabel("도착지 : " + rv.getArriveLocation());
+		jLabelArrive.setBounds(148, 106, 203, 34);
+		jLabelArrive.setHorizontalAlignment(SwingConstants.LEFT);
+		contentPane.add(jLabelArrive);
 		
-		JLabel lblNewLabel_3 = new JLabel("도착지 : " + rv.getArriveLocation());
-		lblNewLabel_3.setBounds(148, 106, 203, 34);
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
-		contentPane.add(lblNewLabel_3);
+		jLabelTime = new JLabel("시간 : " + rv.getBoardingDate());
+		jLabelTime.setBounds(148, 150, 221, 34);
+		jLabelTime.setHorizontalAlignment(SwingConstants.LEFT);
+		contentPane.add(jLabelTime);
 		
-		JLabel lblNewLabel_4 = new JLabel("시간 : " + rv.getBoardingDate());
-		lblNewLabel_4.setBounds(148, 150, 221, 34);
-		lblNewLabel_4.setHorizontalAlignment(SwingConstants.LEFT);
-		contentPane.add(lblNewLabel_4);
+		jLabelFee = new JLabel("금액 : " + rv.getFee());
+		jLabelFee.setHorizontalAlignment(SwingConstants.LEFT);
+		jLabelFee.setBounds(148, 194, 155, 27);
+		contentPane.add(jLabelFee);
 		
-		JLabel lblNewLabel_5 = new JLabel("금액 : " + rv.getFee());
-		lblNewLabel_5.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_5.setBounds(148, 194, 155, 27);
-		contentPane.add(lblNewLabel_5);
-		
-		JButton btnNewButton = new JButton("결제");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		btnPay = new JButton("결제");
+		btnPay.setForeground(new Color(255, 255, 255));
+		btnPay.setFont(new Font("굴림", Font.BOLD, 18));
+		btnPay.setBackground(new Color(30, 144, 255));
+		btnPay.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
@@ -81,12 +78,9 @@ public class Pay extends JFrame {
 					JOptionPane.showMessageDialog(null, "포인트가 부족합니다. 충전해주세요.");
 					dispose();
 				} else {
-					
-					UserDAO userDao;
 					try {
-						userDao = new UserDAO();
+						UserDAO userDao = new UserDAO();
 						int res = userDao.insertReservation(rv, uv.getId(), index);
-						
 						if(res > 0) {
 							ss.getSelectedButton().setEnabled(false);
 							ss.getSelectedButton().setBackground(Color.BLACK);
@@ -100,28 +94,28 @@ public class Pay extends JFrame {
 							dispose();
 						}
 						
-					} catch (ClassNotFoundException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (SQLException e1) {
+					} catch (ClassNotFoundException | SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
 			}
 		});
-		btnNewButton.setBounds(106, 305, 119, 53);
-		contentPane.add(btnNewButton);
+		btnPay.setBounds(106, 305, 119, 53);
+		contentPane.add(btnPay);
 		
-		JButton btnNewButton_1 = new JButton("취소");
-		btnNewButton_1.addMouseListener(new MouseAdapter() {
+		btnCancel = new JButton("취소");
+		btnCancel.setForeground(new Color(255, 255, 255));
+		btnCancel.setFont(new Font("굴림", Font.BOLD, 18));
+		btnCancel.setBackground(new Color(30, 144, 255));
+		btnCancel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
 			}
 		});
-		btnNewButton_1.setBounds(237, 305, 119, 53);
-		contentPane.add(btnNewButton_1);
+		btnCancel.setBounds(237, 305, 119, 53);
+		contentPane.add(btnCancel);
 	}
 	
 }

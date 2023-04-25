@@ -1,9 +1,9 @@
 package GUI.Manager.ROUTE;
 import DAO.ManagerDAO;
+import DAO.UserDAO;
 import GUI.Manager.AdminMain;
-import GUI.Manager.BUS.AdminBuyBus;
-import GUI.Manager.BUS.AdminSellBus;
-import VO.BusVO;
+import GUI.User.SeatSelect;
+import VO.OperationVO;
 import VO.RouteVO;
 
 import javax.swing.*;
@@ -11,6 +11,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -25,8 +27,9 @@ public class AdminFindRoutes extends JFrame {
     private JPanel twoButtonPanel;
     private JButton btnBuy; // 버스 구매 버튼
     private JButton btnSell; // 버스 판매 버튼
-
-    String header[] = {"id", "boardingDate", "startLocation", "arriveLocation", "fee", "busId"};
+    private JButton btnBack;
+    private DefaultTableModel model;
+    String header[] = {"rid", "탑승일", "출발장소", "도착장소", "요금", "busId"};
 
 
     /**
@@ -46,7 +49,7 @@ public class AdminFindRoutes extends JFrame {
         contentPane.add(lblNewLabel, BorderLayout.NORTH);
 
         ArrayList<RouteVO> findAllRoutes= new ManagerDAO().findAllRoutes();
-        DefaultTableModel model=new DefaultTableModel(header, 0);
+        model=new DefaultTableModel(header, 0);
         for(RouteVO routeVO : findAllRoutes){
             model.addRow(new Object[]{routeVO.getId(), routeVO.getBoardingDate(), routeVO.getStartLocation(),
                     routeVO.getArriveLocation(), routeVO.getFee(), routeVO.getFk_busId()});
@@ -54,11 +57,37 @@ public class AdminFindRoutes extends JFrame {
 
         table = new JTable(model);
         table.setBackground(Color.WHITE);
+        table.setEnabled(true);
+        table.setDefaultEditor(Object.class, null);
+        table.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    try {
+                        JTable target = (JTable) e.getSource();
+                        int row = target.getSelectedRow();
+                        System.out.println(target);
+                        OperationVO operationVO = new ManagerDAO().findByRouteIdOperation((int)target.getValueAt(row, 0));
+                        System.out.println(operationVO);
+                        if(operationVO != null){
+                            CheckByRouteIdOperation checkByRouteIdOperation = new CheckByRouteIdOperation(operationVO);
+                            checkByRouteIdOperation.setVisible(true);
+                        }
+                    } catch(Exception e1) {
+                        e1.printStackTrace();
+                    }
+
+                }
+            }
+        });
+
+
+
         scrolledTable = new JScrollPane(table);
         scrolledTable.getViewport().setBackground(Color.WHITE);
         contentPane.add(scrolledTable, BorderLayout.CENTER);
         JTableHeader hd = table.getTableHeader();
         hd.setBackground(new Color(30, 144, 255));
+
 
         /*
             하위 버튼 구조
@@ -72,7 +101,7 @@ public class AdminFindRoutes extends JFrame {
         btnBuy.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    AdminAddRoute adminAddRoute = new AdminAddRoute();
+                    new AdminAddRoute();
                     updateTable();
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -90,10 +119,9 @@ public class AdminFindRoutes extends JFrame {
         btnSell.setBackground(new Color(30, 144, 255));
         btnSell.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // 노선 삭제가 들어갈 구간
-                AdminDeleteRoute adminDeleteRoute = new AdminDeleteRoute();
                 try {
-					updateTable();
+                    new AdminDeleteRoute();
+                    updateTable();
 				} catch (ClassNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -108,11 +136,11 @@ public class AdminFindRoutes extends JFrame {
 
 
 
-        JButton btnNewButton = new JButton("메인으로");
-        btnNewButton.setForeground(new Color(255, 255, 255));
-        btnNewButton.setFont(new Font("굴림", Font.BOLD, 15));
-        btnNewButton.setBackground(new Color(30, 144, 255));
-        btnNewButton.addActionListener(new ActionListener() {
+        btnBack = new JButton("메인으로");
+        btnBack.setForeground(new Color(255, 255, 255));
+        btnBack.setFont(new Font("굴림", Font.BOLD, 15));
+        btnBack.setBackground(new Color(30, 144, 255));
+        btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 AdminMain adminMain = new AdminMain();
                 adminMain.setVisible(true);
@@ -121,16 +149,14 @@ public class AdminFindRoutes extends JFrame {
             }
         });
         buttonPanel.add(twoButtonPanel, BorderLayout.NORTH);
-        buttonPanel.add(btnNewButton, BorderLayout.SOUTH);
+        buttonPanel.add(btnBack, BorderLayout.SOUTH);
         contentPane.add(buttonPanel, BorderLayout.SOUTH);
-
-
 
         setVisible(true);
     }
     public void updateTable() throws SQLException, ClassNotFoundException {
         ArrayList<RouteVO> findAllRoutes= new ManagerDAO().findAllRoutes();
-        DefaultTableModel model=new DefaultTableModel(header, 0);
+        model=new DefaultTableModel(header, 0);
         for(RouteVO routeVO : findAllRoutes){
             model.addRow(new Object[]{routeVO.getId(), routeVO.getBoardingDate(), routeVO.getStartLocation(),
                     routeVO.getArriveLocation(), routeVO.getFee(), routeVO.getFk_busId()});

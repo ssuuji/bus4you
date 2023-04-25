@@ -19,14 +19,16 @@ import javax.swing.table.JTableHeader;
 public class AdminFindAllBuses extends JFrame {
 
     private JPanel contentPane;
+    private JLabel lblNewLabel;
     private JTable table;
     private JScrollPane scrolledTable;
+    private DefaultTableModel model;
     private JPanel buttonPanel; // 버튼이 위치할 JPanel
     private JPanel twoButtonPanel;
     private JButton btnBuy; // 버스 구매 버튼
     private JButton btnSell; // 버스 판매 버튼
 
-    String header[] = {"id", "busCode", "totalSeat"};
+    String header[] = {"bid", "버스 이름", "좌석 수"};
 
 
     /**
@@ -38,15 +40,15 @@ public class AdminFindAllBuses extends JFrame {
         contentPane = new JPanel();
         contentPane.setBackground(new Color(255, 255, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-        setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout());
-        JLabel lblNewLabel = new JLabel("회사 버스 목록");
+        setContentPane(contentPane);
+
+        lblNewLabel = new JLabel("회사 버스 목록");
         lblNewLabel.setFont(new Font("굴림", Font.BOLD, 30));
         contentPane.add(lblNewLabel, BorderLayout.NORTH);
 
         ArrayList<BusVO> findAllBuses = new ManagerDAO().findAllBuses();
-        DefaultTableModel model=new DefaultTableModel(header, 0);
+        model=new DefaultTableModel(header, 0);
         for(BusVO busVO : findAllBuses){
             model.addRow(new Object[]{busVO.getId(), busVO.getBusCode(), busVO.getTotalSeat()});
         }
@@ -71,7 +73,7 @@ public class AdminFindAllBuses extends JFrame {
         btnBuy.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    AdminBuyBus adminBuyBus = new AdminBuyBus();
+                    new AdminBuyBus();
                     updateTable();
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -90,7 +92,7 @@ public class AdminFindAllBuses extends JFrame {
         btnSell.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    AdminSellBus adminSellBus = new AdminSellBus();
+                    new AdminSellBus();
                     updateTable();
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -126,7 +128,7 @@ public class AdminFindAllBuses extends JFrame {
     }
     public void updateTable() throws SQLException, ClassNotFoundException {
         ArrayList<BusVO> findAllBuses = new ManagerDAO().findAllBuses();
-        DefaultTableModel model = new DefaultTableModel(header, 0);
+        model = new DefaultTableModel(header, 0);
         for (BusVO busVO : findAllBuses) {
             model.addRow(new Object[]{busVO.getId(), busVO.getBusCode(), busVO.getTotalSeat()});
         }

@@ -8,8 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-public class AdminBuyBus {
-    private JDialog dialog;
+public class AdminBuyBus extends JDialog{
     private JPanel contentPane;
     private JLabel busCodeLabel;
     private JTextField busCodeValue;
@@ -19,20 +18,19 @@ public class AdminBuyBus {
 
 
     public AdminBuyBus(){
-        dialog = new JDialog();
-        dialog.setBackground(new Color(255, 255, 255));
-        dialog.setModal(true);
-        dialog.setTitle("버스 구입");
-        dialog.setSize(200, 150);
-        dialog.setLocationRelativeTo(null);
+        setBackground(new Color(255, 255, 255));
+        setModal(true);
+        setTitle("버스 구입");
+        setSize(200, 150);
+        setLocationRelativeTo(null);
 
         // 패널을 만들고 라벨과 텍스트 필드를 추가합니다.
         contentPane = new JPanel(new GridLayout(2, 2));
         contentPane.setBackground(Color.WHITE);
-        busCodeLabel = new JLabel("    busCode:");
+        busCodeLabel = new JLabel("    버스 이름:");
         busCodeLabel.setBackground(new Color(255, 255, 255));
         busCodeValue = new JTextField();
-        totalSeatLabel = new JLabel("    totalSeat:");
+        totalSeatLabel = new JLabel("    좌석 수:");
         totalSeatLabel.setBackground(new Color(255, 255, 255));
         totalSeatValue = new JTextField();
 
@@ -40,7 +38,7 @@ public class AdminBuyBus {
         contentPane.add(busCodeValue);
         contentPane.add(totalSeatLabel);
         contentPane.add(totalSeatValue);
-        dialog.getContentPane().add(contentPane, BorderLayout.CENTER);
+        getContentPane().add(contentPane, BorderLayout.CENTER);
 
         // 확인 버튼을 추가합니다.
         btnOK = new JButton("확인");
@@ -64,13 +62,13 @@ public class AdminBuyBus {
                 }
 
                 // 모달 창을 닫습니다.
-                dialog.dispose();
+                dispose();
             }
         });
-        dialog.getContentPane().add(btnOK, BorderLayout.SOUTH);
+        getContentPane().add(btnOK, BorderLayout.SOUTH);
 
         // 모달 창을 보여줍니다.
-        dialog.setVisible(true);
+        setVisible(true);
 
     }
 }

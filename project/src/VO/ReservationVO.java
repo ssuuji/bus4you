@@ -1,61 +1,60 @@
 package VO;
 
 public class ReservationVO {
-	
-	private int id;
-	private String boardingdate;
-	private int seatid;
-	private int fk_userid;
-	private int fk_routeid; 
-	
-	public ReservationVO(int id, String boardingdate,int seatid,int fk_userid, int fk_routeid) {
-		this.id = id;
-		this.boardingdate = boardingdate;
-		this.seatid = seatid;
-		this.fk_userid = fk_userid;
-		this.fk_routeid = fk_routeid;
-		
-	}
 
-	public int getId() {
-		return id;
-	}
+    private int id;
+    private String boardingDate;
+    private int seatId;
+    private int fk_userId;
+    private int fk_routeId;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public ReservationVO(int id, String boardingDate, int seatId, int fk_userid, int fk_routeId) {
+        this.id = id;
+        this.boardingDate = boardingDate;
+        this.seatId = seatId;
+        this.fk_userId = fk_userid;
+        this.fk_routeId = fk_routeId;
 
-	public String getBoardingdate() {
-		return boardingdate;
-	}
+    }
 
-	public void setBoardingdate(String boardingdate) {
-		this.boardingdate = boardingdate;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public int getSeatid() {
-		return seatid;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setSeatid(int seatid) {
-		this.seatid = seatid;
-	}
+    public String getBoardingDate() {
+        return boardingDate;
+    }
 
-	public int getFk_userid() {
-		return fk_userid;
-	}
+    public void setBoardingDate(String boardingDate) {
+        this.boardingDate = boardingDate;
+    }
 
-	public void setFk_userid(int fk_userid) {
-		this.fk_userid = fk_userid;
-	}
+    public int getSeatId() {
+        return seatId;
+    }
 
-	public int getFk_routeid() {
-		return fk_routeid;
-	}
+    public void setSeatId(int seatId) {
+        this.seatId = seatId;
+    }
 
-	public void setFk_routeid(int fk_routeid) {
-		this.fk_routeid = fk_routeid;
-	}
+    public int getFk_userId() {
+        return fk_userId;
+    }
 
-	
+    public void setFk_userId(int fk_userId) {
+        this.fk_userId = fk_userId;
+    }
+
+    public int getFk_routeId() {
+        return fk_routeId;
+    }
+
+    public void setFk_routeId(int fk_routeId) {
+        this.fk_routeId = fk_routeId;
+    }
+
 }

@@ -11,11 +11,11 @@ public class UserVO {
 
     public UserVO(int id, String userId, String password, String name, String phone, int point, int isManager){
         this.id = id;
-        this.name = name;
         this.userId = userId;
         this.password = password;
         this.name=name;
         this.phone = phone;
+        this.name = name;
         this.point = point;
         this.isManager = isManager;
     }

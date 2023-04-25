@@ -9,8 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-public class AdminSellBus {
-    private JDialog dialog;
+public class AdminSellBus extends JDialog{
     private JPanel contentPane;
     private JLabel busIdLabel;
     private JTextField busIdValue;
@@ -18,22 +17,21 @@ public class AdminSellBus {
 
 
     public AdminSellBus(){
-        dialog = new JDialog();
-        dialog.setBackground(new Color(255, 255, 255));
-        dialog.setModal(true);
-        dialog.setTitle("버스 판매");
-        dialog.setSize(200, 100);
-        dialog.setLocationRelativeTo(null);
+        setBackground(new Color(255, 255, 255));
+        setModal(true);
+        setTitle("버스 판매");
+        setSize(200, 100);
+        setLocationRelativeTo(null);
 
         // 패널을 만들고 라벨과 텍스트 필드를 추가합니다.
         contentPane = new JPanel(new GridLayout(1, 1));
         contentPane.setBackground(Color.WHITE);
-        busIdLabel = new JLabel("    busId:");
+        busIdLabel = new JLabel("    bid:");
         busIdValue = new JTextField();
 
         contentPane.add(busIdLabel);
         contentPane.add(busIdValue);
-        dialog.getContentPane().add(contentPane, BorderLayout.CENTER);
+        getContentPane().add(contentPane, BorderLayout.CENTER);
 
         // 확인 버튼을 추가합니다.
         btnOK = new JButton("확인");
@@ -54,13 +52,13 @@ public class AdminSellBus {
                 }
 
                 // 모달 창을 닫습니다.
-                dialog.dispose();
+                dispose();
             }
         });
-        dialog.getContentPane().add(btnOK, BorderLayout.SOUTH);
+        getContentPane().add(btnOK, BorderLayout.SOUTH);
 
         // 모달 창을 보여줍니다.
-        dialog.setVisible(true);
+        setVisible(true);
 
     }
 }

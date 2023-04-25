@@ -37,10 +37,6 @@ public class CheckOperation {
 		dialog.setTitle(busCode + " " + date + " 노선 등록");
 		dialog.setSize(1149, 417);
 		dialog.setLocationRelativeTo(null);
-
-//        setTitle(busCode + " " + date + " 노선 등록");
-//        setSize(500, 300);
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		dialog.setBounds(100, 100, 605, 605);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));

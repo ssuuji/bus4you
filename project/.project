@@ -14,4 +14,36 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/IMAGE/aaaa.png</name>
+			<type>1</type>
+			<location>C:/Users/osj/Desktop/dddd/aaaa.png</location>
+		</link>
+		<link>
+			<name>src/IMAGE/bus.png</name>
+			<type>1</type>
+			<location>C:/Users/osj/Desktop/dddd/asd.png</location>
+		</link>
+		<link>
+			<name>src/IMAGE/driver.png</name>
+			<type>1</type>
+			<location>C:/Users/osj/Desktop/dddd/bus-driver.png</location>
+		</link>
+		<link>
+			<name>src/IMAGE/qjtm.png</name>
+			<type>1</type>
+			<location>C:/Users/osj/Desktop/dddd/qjtm.png</location>
+		</link>
+		<link>
+			<name>src/IMAGE/ssss.png</name>
+			<type>1</type>
+			<location>C:/Users/osj/Desktop/dddd/ssss.png</location>
+		</link>
+		<link>
+			<name>src/IMAGE/zzzz.png</name>
+			<type>1</type>
+			<location>C:/Users/osj/Desktop/dddd/zzzz.png</location>
+		</link>
+	</linkedResources>
 </projectDescription>

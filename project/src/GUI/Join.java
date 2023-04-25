@@ -1,14 +1,10 @@
 package GUI;
 
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import DAO.JoinDAO;
-import VO.UserVO;
 
 
 import javax.swing.JLabel;
@@ -21,26 +17,18 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
 public class Join extends JDialog {
 
     private JPanel contentPane;
-    private JTextField textField_id;
-    private JTextField textField_pw;
-    private JTextField textField_name;
-    private JTextField textField_phone;
+    private JTextField textFieldId;
+    private JTextField textFieldPassword;
+    private JTextField textFieldName;
+    private JTextField textFieldPhone;
     boolean overlap=false;
-    Login login = new Login();
     
     /**
      * Create the frame.
@@ -54,15 +42,7 @@ public class Join extends JDialog {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         setContentPane(contentPane);
-        contentPane.setLayout(null);	
-    	
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setBounds(100, 100, 592, 433);
-//        contentPane = new JPanel();
-//        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-//
-//        setContentPane(contentPane);
-//        contentPane.setLayout(null);
+        contentPane.setLayout(null);
 
         JLabel lblNewLabel = new JLabel("회원가입");
         lblNewLabel.setFont(new Font("굴림", Font.BOLD, 60));
@@ -89,29 +69,29 @@ public class Join extends JDialog {
         lblNewLabel_phone.setBounds(36, 368, 123, 51);
         contentPane.add(lblNewLabel_phone);
 
-        textField_id = new JTextField();
-        textField_id.setBounds(169, 138, 271, 42);
-        textField_id.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
-        contentPane.add(textField_id);
-        textField_id.setColumns(10);
+        textFieldId = new JTextField();
+        textFieldId.setBounds(169, 138, 271, 42);
+        textFieldId.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
+        contentPane.add(textFieldId);
+        textFieldId.setColumns(10);
 
-        textField_pw = new JTextField();
-        textField_pw.setColumns(10);
-        textField_pw.setBounds(169, 221, 271, 42);
-        textField_pw.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
-        contentPane.add(textField_pw);
+        textFieldPassword = new JTextField();
+        textFieldPassword.setColumns(10);
+        textFieldPassword.setBounds(169, 221, 271, 42);
+        textFieldPassword.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
+        contentPane.add(textFieldPassword);
 
-        textField_name = new JTextField();
-        textField_name.setColumns(10);
-        textField_name.setBounds(169, 297, 271, 42);
-        textField_name.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
-        contentPane.add(textField_name);
+        textFieldName = new JTextField();
+        textFieldName.setColumns(10);
+        textFieldName.setBounds(169, 297, 271, 42);
+        textFieldName.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
+        contentPane.add(textFieldName);
 
-        textField_phone = new JTextField();
-        textField_phone.setColumns(10);
-        textField_phone.setBounds(169, 375, 271, 42);
-        textField_phone.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
-        contentPane.add(textField_phone);
+        textFieldPhone = new JTextField();
+        textFieldPhone.setColumns(10);
+        textFieldPhone.setBounds(169, 375, 271, 42);
+        textFieldPhone.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
+        contentPane.add(textFieldPhone);
 
         JButton btnNewButton = new JButton("중복확인");                                //ID를 입력받으면 DB에 ID가 중복되는게 있나 확인 후 가능 불가능 출력
         btnNewButton.setForeground(new Color(255, 255, 255));
@@ -119,7 +99,7 @@ public class Join extends JDialog {
         btnNewButton.setBackground(new Color(30, 144, 255));
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String userid = textField_id.getText();
+                String userid = textFieldId.getText();
                 if (userid.trim().isEmpty()) { // 빈 문자열인 경우
                     JOptionPane.showMessageDialog(null, "아이디를 입력해주세요."); // 메시지 출력
                     return; // 메소드를 종료합니다.
@@ -147,10 +127,10 @@ public class Join extends JDialog {
         btnNewButton_go.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                String userid = textField_id.getText(); // 아이디
-                String pw = textField_pw.getText(); // 비밀번호
-                String name = textField_name.getText(); // 이름
-                String phone = textField_phone.getText(); // 휴대폰 번호
+                String userid = textFieldId.getText(); // 아이디
+                String pw = textFieldPassword.getText(); // 비밀번호
+                String name = textFieldName.getText(); // 이름
+                String phone = textFieldPhone.getText(); // 휴대폰 번호
 
                 if(userid.isEmpty()) {   // 전체 다 입력되었는지 확인
                     JOptionPane.showMessageDialog(null, "아이디를 입력해주세요.");
@@ -199,13 +179,12 @@ public class Join extends JDialog {
         btnNewButton_go.setBounds(169, 453, 102, 42);
         contentPane.add(btnNewButton_go);
 
-        JButton btnNewButton_cancel = new JButton("취소");                  //취소버튼 누를시 창 닫기
+        JButton btnNewButton_cancel = new JButton("취소");
         btnNewButton_cancel.setFont(new Font("굴림", Font.BOLD, 18));
         btnNewButton_cancel.setForeground(new Color(255, 255, 255));
         btnNewButton_cancel.setBackground(new Color(30, 144, 255));
         btnNewButton_cancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	
             	dispose();
             }
         });

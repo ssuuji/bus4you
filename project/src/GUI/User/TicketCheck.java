@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import DAO.UserDAO;
 
@@ -21,7 +22,11 @@ public class TicketCheck extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+    private JLabel jLabel;
 	private JScrollPane scrolledTable;
+    private DefaultTableModel model;
+    private JButton btnBack;
+    String header[] = {"예약번호", "출발지", "도착지", "탑승일", "버스id", "좌석번호", "요금"};
 	
 
 	/**
@@ -31,7 +36,7 @@ public class TicketCheck extends JFrame {
 	 */
 
 	
-	public TicketCheck(UserVO uv) throws ClassNotFoundException, SQLException {
+	public TicketCheck(UserVO userVO) throws ClassNotFoundException, SQLException {
 
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,24 +46,24 @@ public class TicketCheck extends JFrame {
 
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout());
-        JLabel lblNewLabel = new JLabel("나의 예매 정보 확인");
-        lblNewLabel.setFont(new Font("굴림", Font.BOLD, 30));
-        contentPane.add(lblNewLabel, BorderLayout.NORTH);
-		String header[] = {"예약번호", "출발지", "도착지", "탑승일", "버스id", "좌석번호", "요금"};
-		UserDAO userDao = new UserDAO();
-		ArrayList<ReservationVO> arv = userDao.selectAllReservation(uv.getId());
+        jLabel = new JLabel("나의 예매 정보 확인");
+        jLabel.setFont(new Font("굴림", Font.BOLD, 30));
+        contentPane.add(jLabel, BorderLayout.NORTH);
+		ArrayList<ReservationVO> arv = new UserDAO().selectAllReservation(userVO.getId());
 
-        DefaultTableModel model=new DefaultTableModel(header, 0);
-        
+        model=new DefaultTableModel(header, 0);
         for(ReservationVO rev : arv){
-        	RouteVO rv = userDao.SelectRoute(rev.getFk_routeid());
-            model.addRow(new Object[]{rev.getId(), rv.getStartLocation(), rv.getArriveLocation(), rv.getBoardingDate(), rv.getFk_busId(), rev.getSeatid(), rv.getFee()});
+        	RouteVO rv = new UserDAO().SelectRoute(rev.getFk_routeId());
+            model.addRow(new Object[]{rev.getId(), rv.getStartLocation(), rv.getArriveLocation(), rv.getBoardingDate(), rv.getFk_busId(), rev.getSeatId(), rv.getFee()});
         }
 
         table = new JTable(model);
+        table.setBackground(Color.WHITE);
         scrolledTable = new JScrollPane(table);
+        scrolledTable.getViewport().setBackground(Color.WHITE);
         contentPane.add(scrolledTable, BorderLayout.CENTER);
-		
+        JTableHeader hd = table.getTableHeader();
+        hd.setBackground(new Color(30, 144, 255));
         
         // 삭제기능
         table.setDefaultEditor(Object.class, null);
@@ -77,11 +82,11 @@ public class TicketCheck extends JFrame {
                        UserDAO userDao = new UserDAO();
                        userDao.deleteReservation(reservationId);
                        // 포인트 환불
-                       userDao.updatePoint(uv.getId(), fee);
-                       uv.setPoint(uv.getPoint() + fee);
+                       userDao.updatePoint(userVO.getId(), fee);
+                       userVO.setPoint(userVO.getPoint() + fee);
                        
                        // JTable 모델에서 행 삭제
-                       DefaultTableModel model = (DefaultTableModel) table.getModel();
+                       model = (DefaultTableModel) table.getModel();
                        model.removeRow(row);
 
                     } catch (SQLException | ClassNotFoundException ex) {
@@ -91,21 +96,20 @@ public class TicketCheck extends JFrame {
               }
            }
         });
-        
-        /////
-        
-
         /*
             하위 버튼 구조
          */
         
-        JButton btnNewButton = new JButton("메인으로");
-        btnNewButton.addActionListener(new ActionListener() {
+        btnBack = new JButton("뒤로가기");
+        btnBack.setForeground(new Color(255, 255, 255));
+        btnBack.setFont(new Font("굴림", Font.BOLD, 15));
+        btnBack.setBackground(new Color(30, 144, 255));
+        btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	dispose();
 				setVisible(false);
 				try {
-					new UserMain(uv).setVisible(true);
+					new UserMain(userVO).setVisible(true);
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -114,7 +118,7 @@ public class TicketCheck extends JFrame {
             }
         });
         
-        contentPane.add(btnNewButton, BorderLayout.SOUTH);
+        contentPane.add(btnBack, BorderLayout.SOUTH);
         setVisible(true);
 		
 	}

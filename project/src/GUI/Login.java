@@ -15,7 +15,6 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -27,11 +26,11 @@ import javax.swing.ImageIcon;
 public class Login extends JFrame {
 
     private JPanel contentPane;
-    private JTextField textField_id;
-    private JPasswordField passwordField;
+    private JTextField textFieldId;
+    private JPasswordField textFieldPssword;
     static  UserVO user = null;
 
-    /**
+    /**t
      * Launch the application.
      */
     public static void main(String[] args) {
@@ -75,17 +74,17 @@ public class Login extends JFrame {
         lblNewLabel_pw.setBounds(69, 277, 33, 42);
         contentPane.add(lblNewLabel_pw);
 
-        textField_id = new JTextField();                           //ID 입력 받는 곳
-        textField_id.setFont(new Font("굴림", Font.PLAIN, 20));
-        textField_id.setBounds(150, 178, 313, 45);
-        textField_id.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
-        contentPane.add(textField_id);
-        textField_id.setColumns(10);
+        textFieldId = new JTextField();                           //ID 입력 받는 곳
+        textFieldId.setFont(new Font("굴림", Font.PLAIN, 20));
+        textFieldId.setBounds(150, 178, 313, 45);
+        textFieldId.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
+        contentPane.add(textFieldId);
+        textFieldId.setColumns(10);
 
-        passwordField = new JPasswordField();                      //비밀번호 입력 받는 곳
-        passwordField.setBounds(150, 280, 313, 42);
-        passwordField.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
-        contentPane.add(passwordField);
+        textFieldPssword = new JPasswordField();                      //비밀번호 입력 받는 곳
+        textFieldPssword.setBounds(150, 280, 313, 42);
+        textFieldPssword.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(200, 200, 200)));
+        contentPane.add(textFieldPssword);
 
 
 
@@ -94,12 +93,9 @@ public class Login extends JFrame {
         btnNewButton_join.setBackground(new Color(30, 144, 255));
         btnNewButton_join.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	
-                Join join_1 = new Join();           //
-                
-                join_1.setVisible(true);
-                join_1.setLocationRelativeTo(null);
-                
+                Join join = new Join();
+                join.setVisible(true);
+                join.setLocationRelativeTo(null);
             }
         });
         btnNewButton_join.setFont(new Font("굴림", Font.BOLD, 18));
@@ -112,8 +108,8 @@ public class Login extends JFrame {
         btnNewButton_login.setBackground(new Color(30, 144, 255));
         btnNewButton_login.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String userid = textField_id.getText();
-                char[] passwordChars = passwordField.getPassword();
+                String userid = textFieldId.getText();
+                char[] passwordChars = textFieldPssword.getPassword();
                 String password = new String(passwordChars);
 
                 try {
@@ -130,7 +126,6 @@ public class Login extends JFrame {
                             UserMain userMain = new UserMain(user);
                             userMain.setVisible(true);
                             dispose();
-                            System.out.println("손님");
                         }
                         dispose();
                     } else {
@@ -147,9 +142,6 @@ public class Login extends JFrame {
 
             }
         });
-        
-      
-
 
         btnNewButton_login.setFont(new Font("굴림", Font.BOLD, 18));
         btnNewButton_login.setBounds(348, 388, 117, 57);
@@ -159,6 +151,5 @@ public class Login extends JFrame {
         lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\osj\\Desktop\\dddd\\asd.png"));
         lblNewLabel_1.setBounds(69, 32, 130, 109);
         contentPane.add(lblNewLabel_1);
-
     }
 }

@@ -124,7 +124,28 @@ public class ManagerDAO {
         return userVOArrayList;
     }
 
+    /*
+        해당 route id로 운행 상태 가져오기
+     */
 
+    public OperationVO findByRouteIdOperation(int id){
+        OperationVO operationVO = null;
+        try {
+            String sql = "SELECT *" +
+                    "FROM bus4you_Operation " +
+                    "WHERE fk_routeId = (?)";
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                operationVO = (new OperationVO(resultSet.getInt("id"), resultSet.getDate("boardingDate").toString(),
+                        resultSet.getString("startTime"), resultSet.getString("arriveTime"),resultSet.getInt("fk_busId"),resultSet.getInt("fk_routeId")));
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return operationVO;
+    }
 
     /*
         해당 날짜 버스의 운행 리스트 출력
