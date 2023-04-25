@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import DAO.LoginDAO;
 import GUI.Manager.AdminMain;
 import GUI.User.UserMain;
@@ -28,7 +29,7 @@ public class Login extends JFrame {
     private JPanel contentPane;
     private JTextField textField_id;
     private JPasswordField passwordField;
-
+    static  UserVO user = null;
 
     /**
      * Launch the application.
@@ -117,7 +118,7 @@ public class Login extends JFrame {
 
                 try {
                     LoginDAO loginDAO = new LoginDAO();
-                    UserVO user = loginDAO.login(userid, password);
+                    user = loginDAO.login(userid, password);
                     if (user != null) { // DAO의 로그인 메서드 호출
                         if(user.getIsManager() == 1) {
                             // manager

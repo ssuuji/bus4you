@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,9 +32,17 @@ public class UserFindRoute extends JFrame {
     /**
      * Create the frame.
      */
+<<<<<<< HEAD
     public UserFindRoute(String startlocation, String arrivelocation, String boardingdate) throws SQLException, ClassNotFoundException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 604, 605);
+=======
+    public UserFindRoute(String startlocation, String arrivelocation, String boardingdate, UserVO userVO, JTextField textMyPoint) throws SQLException, ClassNotFoundException {
+
+    	
+    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 554, 554);
+>>>>>>> fd7ebd3bdd6a01e7f3d1151dec5ccb1e4c5caeaf
         contentPane = new JPanel();
         contentPane.setBackground(new Color(255, 255, 255));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -67,11 +77,41 @@ public class UserFindRoute extends JFrame {
         table = new JTable(model);
         table.setBackground(Color.WHITE);
         scrolledTable = new JScrollPane(table);
+<<<<<<< HEAD
         scrolledTable.getViewport().setBackground(Color.WHITE);
         contentPane.add(scrolledTable, BorderLayout.CENTER);
 
         JTableHeader hd = table.getTableHeader();
         hd.setBackground(new Color(30, 144, 255));
+=======
+        table.setEnabled(false); // 테이블 셀값을 사용자가 수정못하게
+        contentPane.add(scrolledTable, BorderLayout.CENTER);
+        
+        
+        table.setDefaultEditor(Object.class, null);
+        table.addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(MouseEvent e) {
+        		if (e.getClickCount() == 2) {
+                    JTable target = (JTable) e.getSource();
+                   
+                    try {
+                    	int row = target.getSelectedRow();
+                        int routeId = (int)target.getValueAt(row, 0);
+                         
+                    	RouteVO rv = new UserDAO().SelectRoute((int)target.getValueAt(row, 0));
+                    	SeatSelect seatSelect = new SeatSelect(rv, userVO, textMyPoint);
+	                    seatSelect.setVisible(true);
+	                    
+	                    dispose();
+                    } catch(Exception e1) {
+                    	
+                    }                                                       	                 
+					
+        	}
+        	}
+        });
+        
+>>>>>>> fd7ebd3bdd6a01e7f3d1151dec5ccb1e4c5caeaf
         
         JButton btnNewButton = new JButton("메인으로");
         btnNewButton.setForeground(new Color(255, 255, 255));
