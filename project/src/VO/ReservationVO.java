@@ -56,10 +56,6 @@ public class ReservationVO {
 	public void setFk_routeid(int fk_routeid) {
 		this.fk_routeid = fk_routeid;
 	}
-<<<<<<< HEAD
-	
-=======
->>>>>>> fd7ebd3bdd6a01e7f3d1151dec5ccb1e4c5caeaf
-	
+
 	
 }
