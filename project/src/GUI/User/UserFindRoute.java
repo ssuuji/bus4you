@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -29,8 +31,10 @@ public class UserFindRoute extends JFrame {
     /**
      * Create the frame.
      */
-    public UserFindRoute(String startlocation, String arrivelocation, String boardingdate) throws SQLException, ClassNotFoundException {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public UserFindRoute(String startlocation, String arrivelocation, String boardingdate, UserVO userVO, JTextField textMyPoint) throws SQLException, ClassNotFoundException {
+
+    	
+    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 554, 554);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -65,7 +69,29 @@ public class UserFindRoute extends JFrame {
         scrolledTable = new JScrollPane(table);
         contentPane.add(scrolledTable, BorderLayout.CENTER);
         
-
+        
+        table.setDefaultEditor(Object.class, null);
+        table.addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(MouseEvent e) {
+        		if (e.getClickCount() == 2) {
+                    JTable target = (JTable) e.getSource();
+                   
+                    try {
+                    	int row = target.getSelectedRow();
+                        int routeId = (int)target.getValueAt(row, 0);
+                         
+                    	RouteVO rv = new UserDAO().SelectRoute((int)target.getValueAt(row, 0));
+                    	SeatSelect seatSelect = new SeatSelect(rv, userVO, textMyPoint);
+	                    seatSelect.setVisible(true);
+	                    
+	                    dispose();
+                    } catch(Exception e1) {
+                    	
+                    }                                                       	                 
+					
+        	}
+        	}
+        });
         
         
         JButton btnNewButton = new JButton("메인으로");

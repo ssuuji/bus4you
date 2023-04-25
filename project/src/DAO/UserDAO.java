@@ -37,20 +37,14 @@ public class UserDAO {
 			preparedStatement.setDate(3, Date.valueOf(boardingdate));
 
 			ResultSet resultSet = preparedStatement.executeQuery();
-<<<<<<< HEAD
+
 
 			while (resultSet.next()) {
-				RouteVO route = new RouteVO(resultSet.getInt("id"), resultSet.getString("BoardingDate").toString(),
+				RouteVO route = new RouteVO(resultSet.getInt("id"), resultSet.getDate("BoardingDate").toString(),
 						resultSet.getString("Startlocation"), resultSet.getString("Arrivelocation"),
 						resultSet.getInt("fee"), resultSet.getInt("FK_busID"));
 
-=======
-			
-			while(resultSet.next()) {
-				RouteVO route = new RouteVO(resultSet.getInt("id"),resultSet.getDate("BoardingDate").toString(),
-						resultSet.getString("Startlocation"),resultSet.getString("Arrivelocation"),resultSet.getInt("fee"), resultSet.getInt("FK_busID"));
-				
->>>>>>> f0cd87873bab56446960759b12b82890b00b7f5f
+
 				routeVOArrayList.add(route);
 			}
 		} catch (SQLException exception) {
@@ -106,7 +100,7 @@ public class UserDAO {
 
 			while (rs.next()) {
 
-				rv = new RouteVO(rs.getInt("id"), rs.getString("boardingDate"), rs.getString("startLocation"),
+				rv = new RouteVO(rs.getInt("id"), rs.getDate("boardingDate").toString(), rs.getString("startLocation"),
 						rs.getString("arriveLocation"), rs.getInt("fee"), rs.getInt("fk_busID"));
 			}
 
@@ -130,7 +124,7 @@ public class UserDAO {
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				totalSeat = rs.getInt("totalSeat");
+				totalSeat = rs.getInt("totalseat");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -143,7 +137,7 @@ public class UserDAO {
 
 		ArrayList<Integer> ai = new ArrayList<Integer>();
 
-		String sql = "select seatID from bus4you_Reservation where fk_RouteId = ?";
+		String sql = "select seatid from bus4you_Reservation where fk_routeid = ?";
 
 		try {
 			preparedStatement = conn.prepareStatement(sql);
@@ -151,7 +145,7 @@ public class UserDAO {
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				ai.add(rs.getInt(1));
+				ai.add(rs.getInt("seatid"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -159,27 +153,27 @@ public class UserDAO {
 		return ai;
 	}
 
-	// 유저id로 bus4you_User 테이블 자료 VO로 반환
-
 	// 결제정보로 bus4you_Reservation 테이블에 데이터 삽입
-	public void insertReservation(RouteVO rv, int userId, int seatId) {
+	public int insertReservation(RouteVO rv, int userId, int seatId) {
 
-		String sql = "insert into bus4you_Reservation(boardingDate, seatId, fk_userId, fk_routeId) values (?, ?, ?, ?)";
-
+		String sql = "insert into bus4you_Reservation(boardingdate, seatId, fk_userId, fk_routeId) values (?, ?, ?, ?)";
+		int res = 0;
+		
 		try {
 			preparedStatement = conn.prepareStatement(sql);
 
-			preparedStatement.setString(1, rv.getBoardingDate());
+			preparedStatement.setDate(1, Date.valueOf(rv.getBoardingDate()));
 			preparedStatement.setInt(2, seatId);
 			preparedStatement.setInt(3, userId);
 			preparedStatement.setInt(4, rv.getId());
 
-			preparedStatement.executeUpdate();
+			res = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-
+			System.out.println("예외발생");
+			e.printStackTrace();
 		}
 
-		// return res;
+		return res;
 	}
 
 	// userId로 bus4you_Reservation 모든 데이터 가져오기
@@ -187,7 +181,7 @@ public class UserDAO {
 
 		ArrayList<ReservationVO> arv = new ArrayList<ReservationVO>();
 
-		String sql = "select * from bus4you_Reservation r where fk_userId = ?";
+		String sql = "select * from bus4you_Reservation where fk_userId = ?";
 
 		try {
 			preparedStatement = conn.prepareStatement(sql);
@@ -198,13 +192,14 @@ public class UserDAO {
 
 			while (rs.next()) {
 
-				arv.add(new ReservationVO(rs.getInt("id"), rs.getString("boardingDate"), rs.getInt("seatId"),
+				arv.add(new ReservationVO(rs.getInt("id"), rs.getDate("boardingDate").toString(), rs.getInt("seatId"),
 						rs.getInt("fk_UserId"), rs.getInt("fk_routeId")));
 			}
 
 		} catch (SQLException e) {
 
 		}
+		System.out.println(userId);
 		return arv;
 	}
 
@@ -213,7 +208,7 @@ public class UserDAO {
 	 */
 	public void updatePoint(int userId, int fee) {
 
-		String sql = "update bus4you_User set point = point - ? where id = ?";
+		String sql = "update bus4you_User set point = point + ? where id = ?";
 		try {
 			preparedStatement = conn.prepareStatement(sql);
 			preparedStatement.setInt(1, fee);
@@ -224,5 +219,17 @@ public class UserDAO {
 		}
 
 	}
+	
+	public void deleteReservation(int reservationId) {
+		   String sql = "delete bus4you_reservation where id= ? ";
+		   try {
+		        preparedStatement = conn.prepareStatement(sql);
+		        preparedStatement.setInt(1, reservationId);
+		        preparedStatement.executeUpdate();
+		     } catch (SQLException e) {
 
+		     }
+		         
+		}
+	
 }

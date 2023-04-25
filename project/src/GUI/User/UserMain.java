@@ -125,8 +125,10 @@ public class UserMain extends JFrame {
 				} else { //출발지 != 목적지
 					
 					try {
-						find = new UserFindRoute(startlocation,arrivelocation,boardingdate);
+						find = new UserFindRoute(startlocation,arrivelocation,boardingdate, userVO, textMyPoint);
 						find.setVisible(true);	
+						textMyPoint.setText(String.valueOf(userVO.getPoint()));
+						
 					} catch (ClassNotFoundException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -146,8 +148,16 @@ public class UserMain extends JFrame {
 		JButton btnMyreservation = new JButton("나의 예매티켓 확인");
 		btnMyreservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-
+				
+				
+				try {
+					TicketCheck ticketcheck = new TicketCheck(userVO);
+					ticketcheck.setVisible(true);
+					dispose();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnMyreservation.setBounds(89, 354, 364, 45);
