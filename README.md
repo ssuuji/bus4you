@@ -40,7 +40,7 @@
   + 티켓 구매 및 환불
   
 # 4. 시연 영상
-[![Video Label](http://img.youtube.comvi'O_KVThWN4Cg'/0.jpg)](https://www.youtube.com/watch?v=O_KVThWN4Cg)
+(https://www.youtube.com/watch?v=O_KVThWN4Cg)
 
 # 5. 사용법
 
