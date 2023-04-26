@@ -17,7 +17,7 @@
 | 이름 | 이메일 |역할 |
 | ------ | -- | ----------- |
 | 서재화 | woghk6761@pusan.ac.kr | 관리자 CRUD </br> DB설계</br> Swing|
-| 수지 | sub9399@naver.com | 사용자 CRUD </br> 버스 CRUD</br>Swing|
+| 김수지 | sub9399@naver.com | 사용자 CRUD </br> 버스 CRUD</br>Swing|
 | 정준엽 | innateshy@gmail.com | 예매 CRUD</br> 경로 CRUD </br>Swing|
 | 오석진 | osj0203@naver.com | 회원가입, 로그인</br>Swing 디자인</br>테스트케이스작성|
 
