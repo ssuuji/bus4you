@@ -40,7 +40,7 @@
   + 티켓 구매 및 환불
   
 # 4. 시연 영상
-링크
+https://www.youtube.com/watch?v=O_KVThWN4Cg
 
 # 5. 사용법
 
